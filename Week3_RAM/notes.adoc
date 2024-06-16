@@ -20,7 +20,12 @@ image::screenshots/discreet_time.png[Discrete Time]
 
 - **Combinatorial Logic**: In this form, outputs at a given time depend solely on the inputs at that same time.
 
+image::screenshots/combinatorial.png[Combinatorial Logic]
+
 - **Sequential Logic**: Here, the output at time t depends on the input from time t-1, thus incorporating past states.
+
+image::screenshots/sequential1.png[Sequential Logic Example 1]
+image::screenshots/sequential2.png[Sequential Logic Example 2]
 
 === Handling Delays
 
@@ -31,4 +36,3 @@ image::screenshots/delay_clock_cycle.png[Delay in Clock Cycle]
 === Practical Implications
 
 - **State Representation**: We introduce the concept of state, where the system's value at any time depends on its previous value. This allows us to maintain and build upon previous results.
-
