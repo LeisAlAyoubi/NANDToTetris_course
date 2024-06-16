@@ -36,3 +36,35 @@ image::screenshots/delay_clock_cycle.png[Delay in Clock Cycle]
 === Practical Implications
 
 - **State Representation**: We introduce the concept of state, where the system's value at any time depends on its previous value. This allows us to maintain and build upon previous results.
+
+== Unit 3.2: Flip Flops
+
+Let's recall how we started the last unit, where we introduced discrete time with integer time units. At every time unit t, we want an element that can compute some function based on the value at the previous time unit, t-1. This requires an element to remember one bit of information from time t-1 to time t.
+
+We have lots of combinatorial logic that can perform various manipulations within a single time unit, but moving information from time t-1 to time t is still missing. To address this, we need a component that can maintain state and remember whether it is holding a 0 or a 1. This element needs to be able to flip between these states, hence the name Flip-Flops. 
+
+Flip-Flops remember their state between time units, not just as a function of the current input. The basic flip-flop used in this course is the Clocked Data Flip-Flop. It has a single input and a single output, remembering the input from the last time unit and outputting it in the next time unit.
+
+image::screenshots/sequentiallogicimplementation.png[Sequential Logic Implementation]
+
+To visualize this, if the input starts at 1 at time unit 1, goes down to 0 for time units 2 and 3, goes up to 1, and then down to 0 again, the D flip-flop will output the value of the input from the previous time unit. For instance, at time unit 2, the output will be 1 (the input at time unit 1), and at time unit 3, the output will be 0 (the input at time unit 2), and so on.
+
+image::screenshots/clocked_data_flipflop.png[Clocked Data Flip-Flop]
+
+This behavior is essential for sequential logic, allowing the creation of memories, counters, and more. The little triangles at the bottom of the D flip-flop diagram indicate that it is a sequential chip, dependent on time, unlike previous combinatorial chips.
+
+In this course, we treat the D flip-flop as a primitive operation, not constructed from other gates, even though in real-life hardware, flip-flops can be built from NAND gates. This abstraction simplifies our understanding of sequential logic, separating it from combinatorial logic.
+
+With the D flip-flop, we can build various components. The general approach is to combine D flip-flops in arrays for memory and counters, manipulating their states with combinatorial logic. For example, a counter remembers a number in flip-flops, and combinatorial logic adds one to the counter at each time unit.
+
+Let's explore the first device built from a D flip-flop: a bit chip. This chip remembers a bit indefinitely, loaded when the load input is high. Its output remains the same until a new load operation occurs. 
+
+image::screenshots/onebitregister.png[One Bit Register]
+
+The bit chip's logic can be described as: if load at time t-1 is 1, the output at time t is the input at time t-1. Otherwise, the output at time t remains the same as at time t-1.
+
+To build this chip from a D flip-flop, we start with the idea of looping the output back into the input, maintaining the same value unless a new value is loaded. This requires a multiplexer to choose between the current input and the previous output, based on the load signal.
+
+By following this logic, we ensure that whenever the load signal is high, the input value is stored and remembered. This implementation provides the required functionality, allowing us to build more complex sequential circuits in future units.
+
+image::screenshots/onebitregisterimplementation.png[One Bit Register Implementation]
